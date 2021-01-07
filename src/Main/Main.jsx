@@ -4,19 +4,11 @@ import { makeStyles } from '@material-ui/styles';
 import Counter from '../Counter/Counter';
 import Header from '../Header/Header';
 import { Divider, Grid, Typography } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Main = () => {
-  const [count, setCount] = useState(0);
-
-  const handleIncrement = () => {
-    setCount((count) => count + 1);
-  };
-
-  const handleDecrement = () => {
-    setCount((count) => count - 1);
-  };
-
   const classes = useStyles();
+  const count = useSelector((state) => state.value);
 
   return (
     <div className={classes.container}>
@@ -27,18 +19,8 @@ const Main = () => {
         {count}
       </Typography>
       <Grid container justify="space-evenly" alignItems="center">
-        <Counter
-          title="Card 1"
-          onIncrement={handleIncrement}
-          onDecrement={handleDecrement}
-          count={count}
-        />
-        <Counter
-          title="Card 2"
-          onIncrement={handleIncrement}
-          onDecrement={handleDecrement}
-          count={count}
-        />
+        <Counter title="Card 1" />
+        <Counter title="Card 2" />
       </Grid>
     </div>
   );

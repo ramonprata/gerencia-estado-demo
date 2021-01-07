@@ -2,10 +2,23 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Card, Grid, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCountIncrement, setCountDecrement } from './contterActions';
 
 const Counter = (props) => {
   const classes = useStyles(props);
-  const { title, count, onIncrement, onDecrement } = props;
+  const { title } = props;
+  const count = useSelector((state) => state.value);
+
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    dispatch(setCountIncrement());
+  };
+
+  const handleDecrement = () => {
+    dispatch(setCountDecrement());
+  };
 
   return (
     <Card className={classes.cardCotainer}>
@@ -16,10 +29,10 @@ const Counter = (props) => {
         <Typography variant="h4">{count}</Typography>
       </Grid>
       <Grid container justify="space-evenly" className={classes.containerButons}>
-        <Button onClick={onIncrement} variant="contained" color="primary">
+        <Button onClick={handleIncrement} variant="contained" color="primary">
           Increment
         </Button>
-        <Button onClick={onDecrement} variant="contained" color="secondary">
+        <Button onClick={handleDecrement} variant="contained" color="secondary">
           Decrement
         </Button>
       </Grid>
