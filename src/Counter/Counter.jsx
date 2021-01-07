@@ -5,7 +5,17 @@ import { makeStyles } from '@material-ui/styles';
 
 const Counter = (props) => {
   const classes = useStyles(props);
-  const { title, count, onIncrement, onDecrement } = props;
+  const { title } = props;
+
+  const [count, setCount] = useState(0);
+
+  const handleIncrement = () => {
+    setCount((count) => count + 1);
+  };
+
+  const handleDecrement = () => {
+    setCount((count) => count - 1);
+  };
 
   return (
     <Card className={classes.cardCotainer}>
@@ -16,10 +26,10 @@ const Counter = (props) => {
         <Typography variant="h4">{count}</Typography>
       </Grid>
       <Grid container justify="space-evenly" className={classes.containerButons}>
-        <Button onClick={onIncrement} variant="contained" color="primary">
+        <Button onClick={handleIncrement} variant="contained" color="primary">
           Increment
         </Button>
-        <Button onClick={onDecrement} variant="contained" color="secondary">
+        <Button onClick={handleDecrement} variant="contained" color="secondary">
           Decrement
         </Button>
       </Grid>
